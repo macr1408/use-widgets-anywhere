@@ -25,8 +25,7 @@ trait Notices_Trait {
 				continue;
 			}
 			foreach ( $notices as $notice ) {
-				// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-				echo '<div class="notice notice-' . $type . ' is-dismissible">';
+				echo '<div class="notice notice-' . esc_attr( $type ) . ' is-dismissible">';
 				echo '<p>' . esc_html( $notice ) . '</p>';
 				echo '</div>';
 			}
