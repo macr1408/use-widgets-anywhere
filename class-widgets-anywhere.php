@@ -62,7 +62,7 @@ class Widgets_Anywhere {
 	 * @param array|string $args shortcode args.
 	 * @return string shortcode output.
 	 */
-	public static function widget_anywhere_shortcode( array|string $args ): string {
+	public static function widget_anywhere_shortcode( $args ): string {
 		if ( empty( $args['class'] ) ) {
 			return '';
 		}
