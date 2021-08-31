@@ -14,13 +14,17 @@ Use your Widgets anywhere in your site.
 
 With this plugin you can use any widget anywhere you want, you just need to know the Widget's class name and its arguments, you don't have to limit yourself to sidebars and theme's widgets areas.
 
-To find widgets classes and their arguments needed you can read WordPress' source code or follow our documentation here <link>
+All you need to do is use the shortcode [widget_anywhere widget_class=""] where you want to place your widget and fill the class attribute.
+
+To find widgets classes and their arguments needed you can read WordPress' source code
+
+Follow our documentation here https://crplugins.com.ar/use-widgets-anywhere/
 
 == Frequently Asked Questions ==
 
-= Where can I find the widgets classes and their arguments needed? =
+= Where is the documentation? =
 
-To find widgets classes and their arguments needed you can read WordPress' source code or follow our documentation here <link>
+Follow our documentation here https://crplugins.com.ar/use-widgets-anywhere/
 
 == Changelog ==
 

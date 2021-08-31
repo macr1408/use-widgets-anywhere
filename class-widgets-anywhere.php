@@ -63,7 +63,7 @@ class Widgets_Anywhere {
 	 * @return string shortcode output.
 	 */
 	public static function widget_anywhere_shortcode( $args ): string {
-		if ( empty( $args['class'] ) ) {
+		if ( empty( $args['widget_class'] ) ) {
 			return '';
 		}
 
@@ -73,30 +73,39 @@ class Widgets_Anywhere {
 		);
 		$instance_settings = wp_parse_args( $args, $instance_settings );
 
-		if ( ! class_exists( $args['class'] ) ) {
+		if ( ! class_exists( $args['widget_class'] ) ) {
 			return '';
 		}
-		$widget = new $args['class']();
 
-		$before_widget_classes = 'widget';
-		if ( property_exists( $widget, 'widget_cssclass' ) ) {
-			$before_widget_classes .= ' ' . $widget->widget_cssclass;
+		try {
+			$widget                = new $args['widget_class']();
+			$before_widget_classes = 'widget';
+			if ( ! empty( $args['parent_class'] ) ) {
+				$before_widget_classes .= ' ' . $args['parent_class'];
+			}
+			if ( property_exists( $widget, 'widget_cssclass' ) ) {
+				$before_widget_classes .= ' ' . $widget->widget_cssclass;
+			}
+			$widget_args = array(
+				'before_title'   => '',
+				'after_title'    => '',
+				'before_sidebar' => '',
+				'after_sidebar'  => '',
+				'before_widget'  => '<div class="' . esc_attr( $before_widget_classes ) . '">',
+				'after_widget'   => '</div>',
+				'widget_name'    => '',
+				'widget_id'      => '',
+			);
+
+			ob_start();
+			$widget->widget( $widget_args, $instance_settings );
+			$output = ob_get_clean();
+			return $output;
+		} catch ( \Throwable $error ) {
+			ob_get_clean();
+			return '';
 		}
-		$widget_args = array(
-			'before_title'   => '',
-			'after_title'    => '',
-			'before_sidebar' => '',
-			'after_sidebar'  => '',
-			'before_widget'  => '<div class="' . esc_attr( $before_widget_classes ) . '">',
-			'after_widget'   => '</div>',
-			'widget_name'    => '',
-			'widget_id'      => '',
-		);
 
-		ob_start();
-		$widget->widget( $widget_args, $instance_settings );
-		$output = ob_get_clean();
-		return $output;
 	}
 
 	/**
